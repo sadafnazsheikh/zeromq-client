@@ -1,0 +1,22 @@
+{
+  "name": "mock-publisher",
+  "version": "1.0.0",
+  "description": "Mock publisher for ZMQ data",
+  "main": "disc/app.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "start:dev": "nodemon --watch src/ -e ts  --exec \"tsc && node dist/app.js\"",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/faker": "5.5.8",
+    "@types/zeromq": "5.2.0",
+    "faker": "5.5.3",
+    "nodemon": "2.0.12",
+    "typescript": "4.4.3",
+    "zeromq": "5.2.8"
+  }
+}
