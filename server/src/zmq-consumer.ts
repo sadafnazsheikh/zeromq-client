@@ -39,7 +39,7 @@ class PendingMessage<T> {
     message: T;
 }
 
-type DataListener = (message: DataComplete) => void;
+export type DataListener = (message: DataComplete) => void;
 export class ZMQJoiner {
     private consumerA: ZMQConsumer<DataA>;
     private consumerB: ZMQConsumer<DataB>;
