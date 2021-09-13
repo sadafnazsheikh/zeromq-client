@@ -1,0 +1,30 @@
+.message {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  text-align: left;
+  width: 100%;
+}
+
+.message div {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.date {
+  font-weight: bold;
+  width: 25%;
+}
+
+.coord {
+  width: 10%;
+}
+
+.information {
+  width: 55%;
+}
+
+.empty {
+  width: 55%;
+  color: #aaaaaa;
+}

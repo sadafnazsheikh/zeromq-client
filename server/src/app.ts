@@ -21,8 +21,12 @@ server.listen(8080);
 
 var wss = new WebSocketServer({server: server, path: "/systemData"});
 wss.on('connection', (socket) => {
+    console.log('Incoming connection');
     const stream = getSynchronisedDataStream();
-    const callback: DataListener = (message) => socket.send(message);
+    const callback: DataListener = (message) => {
+        console.log('Sending', message);
+        socket.send(JSON.stringify(message));
+    }
     stream.onMessage(callback);
     socket.on('close', () => stream.offMessage(callback))
 });

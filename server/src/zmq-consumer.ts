@@ -12,7 +12,7 @@ export interface DataB {
     information: string;
 }
 
-export interface DataComplete {
+export interface MessageData {
     timestamp: number;
     lat: number;
     lon: number;
@@ -39,7 +39,7 @@ class PendingMessage<T> {
     message: T;
 }
 
-export type DataListener = (message: DataComplete) => void;
+export type DataListener = (message: MessageData) => void;
 export class ZMQJoiner {
     private consumerA: ZMQConsumer<DataA>;
     private consumerB: ZMQConsumer<DataB>;
@@ -139,7 +139,7 @@ export class SynchronisedDataStream {
         this.callbacks.delete(callback);
     }
 
-    private handleMessage(message: DataComplete) {
+    private handleMessage(message: MessageData) {
         this.callbacks.forEach((callback) => {
             callback(message);
         })

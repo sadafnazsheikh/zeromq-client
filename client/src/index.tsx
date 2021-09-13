@@ -5,6 +5,9 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import { subscribeToMessages } from './features/messages/receiveMessages';
+
+subscribeToMessages('ws://localhost:8080/systemData');
 
 ReactDOM.render(
   <React.StrictMode>
