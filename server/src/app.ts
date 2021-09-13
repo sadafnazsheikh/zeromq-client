@@ -19,14 +19,21 @@ app.get('/user', function (req, res) {
 const server = http.createServer(app);
 server.listen(8080);
 
-var wss = new WebSocketServer({server: server, path: "/systemData"});
+// listen to incoming websocket connections
+const wss = new WebSocketServer({server: server, path: "/systemData"});
 wss.on('connection', (socket) => {
     console.log('Incoming connection');
     const stream = getSynchronisedDataStream();
+
     const callback: DataListener = (message) => {
         console.log('Sending', message);
+        // send it on the websocket
         socket.send(JSON.stringify(message));
-    }
+    };
+
+    // add the listener
     stream.onMessage(callback);
+
+    // remove listener when websocket is closed
     socket.on('close', () => stream.offMessage(callback))
 });

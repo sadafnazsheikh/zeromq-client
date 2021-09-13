@@ -6,6 +6,7 @@ import styles from './Messages.module.css';
 import { Message } from './Message';
 
 export function Messages() {
+    // get the current list of messages
     const messages = useAppSelector(selectMessages);
     const messageList = messages.map((msg) => <li key={msg.timestamp.toString()}>
         <Message message={msg}/>

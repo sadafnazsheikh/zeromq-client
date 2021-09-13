@@ -17,24 +17,27 @@ function compareMessages(messageA: MessageData, messageB: MessageData) {
 
 
 export interface MessagesState {
-  messages: MessageData[];
+    messages: MessageData[];
 }
 
 const initialState: MessagesState = {
-  messages: []
+    messages: []
 };
 
 export const messagesSlice = createSlice({
-  name: 'messages',
-  initialState,
+    name: 'messages',
+    initialState,
 
-  reducers: {
-    addMessage: (state, action: PayloadAction<MessageData>) => {
-        state.messages.push(action.payload);
-        state.messages = state.messages.sort(compareMessages).slice(-MAX_MESSAGES);
-        console.log('Messages', state.messages.length);
-    }
-  },
+    reducers: {
+        // reducer to add a new message
+        addMessage: (state, action: PayloadAction<MessageData>) => {
+            // add to the current messages
+            state.messages.push(action.payload);
+            // sort according to timestamp and keep only the last 30 values
+            state.messages = state.messages.sort(compareMessages).slice(-MAX_MESSAGES);
+            console.log('Messages', state.messages.length);
+        }
+    },
 });
 
 export const { addMessage } = messagesSlice.actions;

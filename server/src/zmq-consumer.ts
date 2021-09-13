@@ -40,6 +40,10 @@ class PendingMessage<T> {
 }
 
 export type DataListener = (message: MessageData) => void;
+
+/**
+ * Joins messages from sources A and B
+ */
 export class ZMQJoiner {
     private consumerA: ZMQConsumer<DataA>;
     private consumerB: ZMQConsumer<DataB>;
@@ -99,7 +103,7 @@ export class ZMQJoiner {
         if (this.pendingA.has(message.timestamp)) {
             // message A has arraived first and is waiting
             const pendingMessageA = this.pendingA.get(message.timestamp);
-            this.pendingB.delete(message.timestamp);
+            this.pendingA.delete(message.timestamp);
             pendingMessageA.sent = true;
             this.callback({
                 ...pendingMessageA.message,
@@ -121,7 +125,9 @@ export class ZMQJoiner {
         }
     }
 }
-
+/**
+ * Allow multiple listeners to listen to the joint data stream
+ */
 export class SynchronisedDataStream {
     private callbacks: Set<DataListener>;
     private source: ZMQJoiner;

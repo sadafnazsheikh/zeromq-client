@@ -1,7 +1,6 @@
 import { store } from "../../app/store";
 import { addMessage } from "./messagesSlice";
 
-
 export function subscribeToMessages(url: string) {
     console.log(`Attempting to connect to ${url}`);
     const ws = new WebSocket(url);
@@ -10,6 +9,7 @@ export function subscribeToMessages(url: string) {
     };
 
     ws.onmessage = function(ev) {
+        // adding the message recieved by the websocket
         store.dispatch(addMessage(JSON.parse(ev.data)));
     };
 
